@@ -1,25 +1,16 @@
-# 프로젝트 트랙 - 프론트엔드 미션 코스
+# React + Vite
 
-안녕하세요. GDG Hongik Univ. 김동현입니다.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-미션 코스는 프로젝트가 시작되는 방학 전에 4주간 기초적인 실력을 키우기 위해 만들어졌어요.
-프로젝트를 위한 실질적인 지식을 직접 공부해가면서 쌓아가는 기간이니 한만큼 얻어간다고도 볼 수 있어요.
+Currently, two official plugins are available:
 
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## 미션 코스 진행 중에 헷갈리는 부분이 생기거나 도움이 필요하다면?
-- 문제가 생긴 내용을 복사하여 검색하고 관련 블로그 글을 찾아보거나 AI에게 물어본다.
-- 함께 미션을 진행하는 팀원들과 어떤 문제를 겪고 있는지 서로 논의한다.
-- 디스코드 프로젝트 트랙 서버에서 사진 캡쳐와 함께 질문을 남긴다.
+## React Compiler
 
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## 미션은 월요일 시작, 일요일 제출을 원칙으로 합니다
-WIL(Weekly I Learned)도 작성해야하는 만큼 시간 안배를 잘 하셔야해요.
-특히 프론트엔드라는 포지션 특성상 코드를 많이 작성해야해요. 프로젝트를 위해 필요한 지식도 많아요.
+## Expanding the ESLint configuration
 
-
-## 폴더 구조와 Todo 리스트
-미션마다 폴더 구조와 Todo를 제공하고 있어요.
-일부 파일과 Todo는 개발하는 방식에 따라 달라질 수 있지만 최대한 맞춰주세요.
-
-
-## 이제부터 시작해봅시다! 화이팅!
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
