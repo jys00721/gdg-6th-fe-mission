@@ -1,14 +1,10 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  background: white;
-  color: black;
-}
-
-#root {
-  text-align: center;
-}
-
-img {
-  width: 50px;
-  height: auto;
+  font-family: Arial, sans-serif;
 }
