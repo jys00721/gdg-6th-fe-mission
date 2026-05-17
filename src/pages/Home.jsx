@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Item from "../components/Item";
-import { searchedData } from "../data/mockData";
+import { getItems } from "../apis/productApi";
 
 const styles = {
   main: `
@@ -55,13 +55,27 @@ const styles = {
 
 function Home() {
   const [keyword, setKeyword] = useState("");
+  const [items, setItems] = useState([]);
   const [resultItem, setResultItem] = useState(null);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const data = await getItems();
+      setItems(data);
+    };
+
+    fetchItems();
+  }, []);
 
   const handleSearch = () => {
     const trimmedKeyword = keyword.trim();
 
-    if (trimmedKeyword === searchedData.itemName) {
-      setResultItem(searchedData);
+    const foundItem = items.find(
+      (item) => item.itemName === trimmedKeyword
+    );
+
+    if (foundItem) {
+      setResultItem(foundItem);
     } else {
       setResultItem(null);
     }

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Item from "../components/Item";
-import { priceSelectedData } from "../data/mockData";
+import { getPriceSelectedItems } from "../apis/productApi";
 
 const styles = {
   page: `
@@ -43,9 +43,25 @@ const styles = {
 };
 
 function PriceFilter() {
-  const [lowPrice, setLowPrice] = useState("0");
-  const [highPrice, setHighPrice] = useState("0");
-  const [filteredItems, setFilteredItems] = useState(priceSelectedData.items);
+  const [lowPrice, setLowPrice] = useState("");
+  const [highPrice, setHighPrice] = useState("");
+
+  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+
+useEffect(() => {
+  const fetchPriceItems = async () => {
+    const data = await getPriceSelectedItems();
+
+    setLowPrice(String(data.low));
+    setHighPrice(String(data.high));
+
+    setItems(data.items);
+    setFilteredItems(data.items);
+  };
+
+  fetchPriceItems();
+}, []);
 
   const handleNumberInput = (e, setter) => {
     const value = e.target.value;
@@ -59,7 +75,7 @@ function PriceFilter() {
     const low = Number(lowPrice);
     const high = Number(highPrice);
 
-    const result = priceSelectedData.items.filter((item) => {
+    const result = items.filter((item) => {
       return item.price >= low && item.price <= high;
     });
 

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Item from "../components/Item";
-import { sortedData } from "../data/mockData";
+import { getSortedItems } from "../apis/productApi";
 
 const styles = {
   page: `
@@ -35,13 +35,25 @@ const styles = {
 
 function ProductSort() {
   const [sortType, setSortType] = useState("");
-  const [items, setItems] = useState(sortedData);
+  const [items, setItems] = useState([]);
+  const [originalItems, setOriginalItems] = useState([]);
+
+  useEffect(() => {
+    const fetchSortedItems = async () => {
+      const data = await getSortedItems();
+
+      setItems(data);
+      setOriginalItems(data);
+    };
+
+    fetchSortedItems();
+  }, []);
 
   const handleSortChange = (e) => {
     const selectedType = e.target.value;
     setSortType(selectedType);
 
-    const copiedItems = [...sortedData];
+    const copiedItems = [...originalItems];
 
     if (selectedType === "name") {
       copiedItems.sort((a, b) => a.itemName.localeCompare(b.itemName));

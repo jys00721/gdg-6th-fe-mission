@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Item from "../components/Item";
-import { categoryData } from "../data/mockData";
+import { getCategoryItems } from "../apis/productApi";
 
 const styles = {
   page: `
@@ -35,6 +35,16 @@ const styles = {
 
 function CategoryFilter() {
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const fetchCategoryItems = async () => {
+      const data = await getCategoryItems();
+      setItems(data);
+    };
+
+    fetchCategoryItems();
+  }, []);
 
   const handleCategoryChange = (e) => {
     const category = e.target.value;
@@ -45,6 +55,10 @@ function CategoryFilter() {
       console.log(`${category} 카테고리 클릭`);
     }
   };
+
+  const filteredItems = selectedCategory
+    ? items.filter((item) => item.category === selectedCategory)
+    : items;
 
   return (
     <main className={styles.page}>
@@ -65,7 +79,7 @@ function CategoryFilter() {
       <p className={styles.sectionTitle}>내 구매 내역</p>
 
       <div className={styles.itemList}>
-        {categoryData.map((item) => (
+        {filteredItems.map((item) => (
           <Item key={item.id} item={item} />
         ))}
       </div>

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 const styles = {
   header: `
@@ -41,6 +41,9 @@ const styles = {
 
 function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isAdminPage = location.pathname === "/admin";
 
   return (
     <header className={styles.header}>
@@ -51,37 +54,40 @@ function Navbar() {
         onClick={() => navigate("/")}
       />
 
-      <nav className={styles.nav}>
-        <button
-          type="button"
-          className={styles.navButton}
-          onClick={() => navigate("/category-filter")}
-        >
-          카테고리 필터링
-        </button>
+      {!isAdminPage && (
+        <nav className={styles.nav}>
+          <button
+            type="button"
+            className={styles.navButton}
+            onClick={() => navigate("/category-filter")}
+          >
+            카테고리 필터링
+          </button>
 
-        <button
-          type="button"
-          className={styles.navButton}
-          onClick={() => navigate("/price-filter")}
-        >
-          가격 범위 필터링
-        </button>
+          <button
+            type="button"
+            className={styles.navButton}
+            onClick={() => navigate("/price-filter")}
+          >
+            가격 범위 필터링
+          </button>
 
-        <button
-          type="button"
-          className={styles.navButton}
-          onClick={() => navigate("/sort")}
-        >
-          상품 정렬
-        </button>
-      </nav>
+          <button
+            type="button"
+            className={styles.navButton}
+            onClick={() => navigate("/sort")}
+          >
+            상품 정렬
+          </button>
+        </nav>
+      )}
 
       <button
         type="button"
         className={styles.adminButton}
+        onClick={() => navigate(isAdminPage ? "/" : "/admin")}
       >
-        관리자
+        {isAdminPage ? "소비자" : "관리자"}
       </button>
     </header>
   );
