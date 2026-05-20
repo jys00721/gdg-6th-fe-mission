@@ -106,18 +106,12 @@ function Item({ item }) {
   return (
     <div className={styles.itemBox}>
       <div className={styles.infoArea}>
-        <h3 className={styles.itemName}>
-          {item.itemName}
-        </h3>
+        <h3 className={styles.itemName}>{item.itemName}</h3>
 
         <div className={styles.detailArea}>
-          <span className={styles.price}>
-            {item.price} 원
-          </span>
+          <span className={styles.price}>{item.price} 원</span>
 
-          <span>
-            남은 수량: {remainingQuantity}개
-          </span>
+          <span>남은 수량: {remainingQuantity}개</span>
         </div>
       </div>
 
@@ -140,11 +134,7 @@ function Item({ item }) {
           type="button"
           disabled={isDisabled}
           onClick={handleCartClick}
-          className={
-            isDisabled
-              ? styles.disabledButton
-              : styles.activeButton
-          }
+          className={isDisabled ? styles.disabledButton : styles.activeButton}
         >
           장바구니
         </button>

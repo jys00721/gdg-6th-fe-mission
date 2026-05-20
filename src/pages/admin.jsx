@@ -80,6 +80,8 @@ function Admin() {
 
   const [deleteName, setDeleteName] = useState("");
 
+  const API_URL = "http://10.90.5.53:8080/admin/products";
+
   const handleNumberInput = (e, setter) => {
     const value = e.target.value;
 
@@ -88,37 +90,107 @@ function Admin() {
     }
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     const newItem = {
-      id: Date.now(),
-      itemName: registerName,
-      price: Number(registerPrice),
-      quantity: Number(registerQuantity),
-      category: registerCategory,
+      productName: registerName,
+      productPrice: Number(registerPrice),
+      remainQuantity: Number(registerQuantity),
     };
 
-    console.log("등록된 상품:", newItem);
-    console.log(
-      `${newItem.itemName} ${newItem.price}원 ${newItem.category} 상품이 등록되었습니다.`
-    );
+    if (!registerName || !registerPrice || !registerQuantity) {
+      alert("상품명, 가격, 수량, 카테고리를 모두 입력해주세요.");
+      return;
+    }
 
-    setRegisterName("");
-    setRegisterPrice("");
-    setRegisterQuantity("");
-    setRegisterCategory("");
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newItem),
+      });
+
+      if (!response.ok) {
+        throw new Error("상품 등록 실패");
+      }
+
+      const data = await response.json();
+
+      console.log("상품 등록 성공:", data);
+      alert("상품이 등록되었습니다.");
+
+      setRegisterName("");
+      setRegisterPrice("");
+      setRegisterQuantity("");
+    } catch (error) {
+      console.error("상품 등록 중 오류 발생:", error);
+      alert("상품 등록에 실패했습니다.");
+    }
   };
 
-  const handleAddStock = () => {
-    console.log(`${stockName} ${stockQuantity}개 추가되었습니다.`);
+  const handleAddStock = async () => {
+    const stockItem = {
+      addQuantity: Number(stockQuantity),
+    };
 
-    setStockName("");
-    setStockQuantity("");
+    if (!stockName || !stockQuantity) {
+      alert("상품명과 수량을 모두 입력해주세요.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_URL}/${stockName}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(stockItem),
+      });
+
+      if (!response.ok) {
+        throw new Error("재고 추가 실패");
+      }
+
+      const data = await response.json();
+
+      console.log("재고 추가 성공:", data);
+      alert("재고가 추가되었습니다.");
+
+      setStockName("");
+      setStockQuantity("");
+    } catch (error) {
+      console.error("재고 추가 중 오류 발생:", error);
+      alert("재고 추가에 실패했습니다.");
+    }
   };
 
-  const handleDelete = () => {
-    console.log(`${deleteName}가 삭제되었습니다.`);
+  const handleDelete = async () => {
+    if (!deleteName) {
+      alert("삭제할 상품명을 입력해주세요.");
+      return;
+    }
 
-    setDeleteName("");
+    try {
+      const response = await fetch(
+        `${API_URL}/${encodeURIComponent(deleteName)}`,
+        {
+          method: "DELETE",
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("상품 삭제 실패");
+      }
+
+      console.log("상품 삭제 성공");
+      alert("상품이 삭제되었습니다.");
+
+      setDeleteName("");
+    } catch (error) {
+      console.error("상품 삭제 중 오류 발생:", error);
+      alert("상품 삭제에 실패했습니다.");
+    }
   };
 
   return (

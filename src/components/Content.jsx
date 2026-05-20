@@ -61,10 +61,7 @@ function Content() {
           className={styles.searchInput}
         />
 
-        <button
-          type="button"
-          className={styles.searchButton}
-        >
+        <button type="button" className={styles.searchButton}>
           검색
         </button>
       </div>
@@ -76,12 +73,10 @@ function Content() {
           className={styles.emptyLogo}
         />
 
-        <p className={styles.emptyText}>
-          검색 결과가 없습니다.
-        </p>
+        <p className={styles.emptyText}>검색 결과가 없습니다.</p>
       </div>
     </main>
   );
 }
 
-export default Home;
+export default Content;

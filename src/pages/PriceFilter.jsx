@@ -49,19 +49,19 @@ function PriceFilter() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
 
-useEffect(() => {
-  const fetchPriceItems = async () => {
-    const data = await getPriceSelectedItems();
+  useEffect(() => {
+    const fetchPriceItems = async () => {
+      const data = await getPriceSelectedItems();
 
-    setLowPrice(String(data.low));
-    setHighPrice(String(data.high));
+      setLowPrice(String(data.low));
+      setHighPrice(String(data.high));
 
-    setItems(data.items);
-    setFilteredItems(data.items);
-  };
+      setItems(data.items);
+      setFilteredItems(data.items);
+    };
 
-  fetchPriceItems();
-}, []);
+    fetchPriceItems();
+  }, []);
 
   const handleNumberInput = (e, setter) => {
     const value = e.target.value;

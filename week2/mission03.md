@@ -42,11 +42,7 @@ import { useState } from "react";
 function Counter() {
   const [count, setCount] = useState(0);
 
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      {count}
-    </button>
-  );
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
 }
 
 export default Counter;
@@ -56,11 +52,11 @@ export default Counter;
 const [count, setCount] = useState(0);
 ```
 
-| 코드 | 의미 |
-|---|---|
-| `count` | 현재 상태값 |
+| 코드       | 의미           |
+| ---------- | -------------- |
+| `count`    | 현재 상태값    |
 | `setCount` | 상태 변경 함수 |
-| `0` | 초기값 |
+| `0`        | 초기값         |
 
 state는 직접 수정하지 않고 `setCount()` 같은 변경 함수를 사용한다.
 
@@ -74,11 +70,11 @@ state는 직접 수정하지 않고 `setCount()` 같은 변경 함수를 사용�
 Mount → Update → Unmount
 ```
 
-| 단계 | 의미 |
-|---|---|
-| Mount | 화면에 처음 나타남 |
-| Update | props나 state 변경으로 다시 렌더링됨 |
-| Unmount | 화면에서 제거됨 |
+| 단계    | 의미                                 |
+| ------- | ------------------------------------ |
+| Mount   | 화면에 처음 나타남                   |
+| Update  | props나 state 변경으로 다시 렌더링됨 |
+| Unmount | 화면에서 제거됨                      |
 
 ---
 
@@ -86,11 +82,11 @@ Mount → Update → Unmount
 
 Hook은 함수형 컴포넌트에서 React 기능을 사용할 수 있게 해주는 함수이다.
 
-| Hook | 역할 |
-|---|---|
-| `useState` | 상태 관리 |
-| `useEffect` | 렌더링 이후 작업 실행 |
-| `useNavigate` | 페이지 이동 |
+| Hook          | 역할                  |
+| ------------- | --------------------- |
+| `useState`    | 상태 관리             |
+| `useEffect`   | 렌더링 이후 작업 실행 |
+| `useNavigate` | 페이지 이동           |
 
 Hook 이름은 보통 `use`로 시작한다.
 
@@ -110,10 +106,10 @@ useEffect(() => {
 }, []);
 ```
 
-| 코드 | 실행 시점 |
-|---|---|
-| `useEffect(() => {})` | 렌더링될 때마다 실행 |
-| `useEffect(() => {}, [])` | 처음 한 번만 실행 |
+| 코드                           | 실행 시점                  |
+| ------------------------------ | -------------------------- |
+| `useEffect(() => {})`          | 렌더링될 때마다 실행       |
+| `useEffect(() => {}, [])`      | 처음 한 번만 실행          |
 | `useEffect(() => {}, [count])` | `count`가 바뀔 때마다 실행 |
 
 ---
@@ -128,11 +124,7 @@ import { useNavigate } from "react-router";
 function Home() {
   const navigate = useNavigate();
 
-  return (
-    <button onClick={() => navigate("/mypage")}>
-      마이페이지 이동
-    </button>
-  );
+  return <button onClick={() => navigate("/mypage")}>마이페이지 이동</button>;
 }
 
 export default Home;
@@ -142,8 +134,8 @@ export default Home;
 
 ```js
 navigate("/home"); // home 페이지 이동
-navigate(-1);      // 뒤로 가기
-navigate(1);       // 앞으로 가기
+navigate(-1); // 뒤로 가기
+navigate(1); // 앞으로 가기
 ```
 
 ---

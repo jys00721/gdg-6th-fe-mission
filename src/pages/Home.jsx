@@ -70,9 +70,7 @@ function Home() {
   const handleSearch = () => {
     const trimmedKeyword = keyword.trim();
 
-    const foundItem = items.find(
-      (item) => item.itemName === trimmedKeyword
-    );
+    const foundItem = items.find((item) => item.itemName === trimmedKeyword);
 
     if (foundItem) {
       setResultItem(foundItem);
@@ -113,9 +111,7 @@ function Home() {
             className={styles.emptyLogo}
           />
 
-          <p className={styles.emptyText}>
-            검색 결과가 없습니다.
-          </p>
+          <p className={styles.emptyText}>검색 결과가 없습니다.</p>
         </div>
       )}
     </main>

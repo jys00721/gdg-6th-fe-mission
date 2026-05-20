@@ -47,10 +47,9 @@ npm install axios
 ```js
 import axios from "axios";
 
-axios.get("API 주소")
-  .then((response) => {
-    console.log(response.data);
-  });
+axios.get("API 주소").then((response) => {
+  console.log(response.data);
+});
 ```
 
 ---
@@ -64,7 +63,8 @@ axios.get("API 주소")
 ```js
 import axios from "axios";
 
-axios.get("https://jsonplaceholder.typicode.com/users/1/todos")
+axios
+  .get("https://jsonplaceholder.typicode.com/users/1/todos")
   .then((response) => {
     console.log(response.data);
   });
@@ -74,13 +74,13 @@ axios.get("https://jsonplaceholder.typicode.com/users/1/todos")
 
 ## fetch와 axios의 차이
 
-| 구분 | fetch | axios |
-|---|---|---|
-| 종류 | JavaScript 내장 함수 | 외부 라이브러리 |
-| 설치 | 필요 없음 | 설치 필요 |
-| JSON 변환 | `response.json()` 필요 | 자동 처리 |
-| 데이터 접근 | 변환 후 사용 | `response.data`로 접근 |
-| 사용 편의성 | 기본적인 기능 제공 | 더 편리한 기능 제공 |
+| 구분        | fetch                  | axios                  |
+| ----------- | ---------------------- | ---------------------- |
+| 종류        | JavaScript 내장 함수   | 외부 라이브러리        |
+| 설치        | 필요 없음              | 설치 필요              |
+| JSON 변환   | `response.json()` 필요 | 자동 처리              |
+| 데이터 접근 | 변환 후 사용           | `response.data`로 접근 |
+| 사용 편의성 | 기본적인 기능 제공     | 더 편리한 기능 제공    |
 
 ---
 
@@ -106,7 +106,8 @@ fetch("https://jsonplaceholder.typicode.com/users/1/todos")
 ```js
 import axios from "axios";
 
-axios.get("https://jsonplaceholder.typicode.com/users/1/todos")
+axios
+  .get("https://jsonplaceholder.typicode.com/users/1/todos")
   .then((response) => {
     console.log(response.data);
   })

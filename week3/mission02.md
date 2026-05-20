@@ -45,6 +45,7 @@ fetch 종료
 ```
 
 ---
+
 ## Promise
 
 `Promise`는 비동기 작업의 결과를 다루기 위한 객체이다.
@@ -78,7 +79,9 @@ setTimeout(() => {
 
 ```js
 async function getTodos() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users/1/todos");
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/users/1/todos",
+  );
   const data = await response.json();
 
   console.log(data);

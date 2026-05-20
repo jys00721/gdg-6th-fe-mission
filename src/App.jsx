@@ -24,7 +24,7 @@ function App() {
         <Route path="/sort" element={<ProductSort />} />
         <Route path="/admin" element={<Admin />} />
       </Routes>
-      
+
       {!isAdminPage && <Footer />}
     </div>
   );

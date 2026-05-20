@@ -20,10 +20,7 @@ const styles = {
 function Footer() {
   return (
     <footer className={styles.footer}>
-      <button
-        type="button"
-        className={styles.cartButton}
-      >
+      <button type="button" className={styles.cartButton}>
         장바구니 구매하기
       </button>
     </footer>
