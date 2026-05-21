@@ -1,40 +1,29 @@
-import { useEffect, useState } from "react";
-import Item from "../components/Item";
-import { getCategoryItems } from "../apis/productApi";
+import { useEffect } from 'react'
+import ProductItem from '../components/ProductItem'
+import { useProductStore } from '../store/productStore'
 
 function CategoryFilter() {
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [items, setItems] = useState([]);
+  const selectedCategory = useProductStore((state) => state.selectedCategory)
+  const items = useProductStore((state) => state.categoryItems)
+  const loadCategoryItems = useProductStore((state) => state.loadCategoryItems)
+  const setSelectedCategory = useProductStore(
+    (state) => state.setSelectedCategory
+  )
 
   useEffect(() => {
-    const fetchCategoryItems = async () => {
-      const data = await getCategoryItems();
-      setItems(data);
-    };
-
-    fetchCategoryItems();
-  }, []);
-
-  const handleCategoryChange = (e) => {
-    const category = e.target.value;
-
-    setSelectedCategory(category);
-
-    if (category !== "") {
-      console.log(`${category} 카테고리 클릭`);
-    }
-  };
+    loadCategoryItems()
+  }, [loadCategoryItems])
 
   const filteredItems = selectedCategory
     ? items.filter((item) => item.category === selectedCategory)
-    : items;
+    : items
 
   return (
     <main className={styles.page}>
       <div className={styles.selectWrapper}>
         <select
           value={selectedCategory}
-          onChange={handleCategoryChange}
+          onChange={(e) => setSelectedCategory(e.target.value)}
           className={styles.select}
         >
           <option value="">카테고리 선택</option>
@@ -49,14 +38,14 @@ function CategoryFilter() {
 
       <div className={styles.itemList}>
         {filteredItems.map((item) => (
-          <Item key={item.id} item={item} />
+          <ProductItem key={item.id} item={item} />
         ))}
       </div>
     </main>
-  );
+  )
 }
 
-export default CategoryFilter;
+export default CategoryFilter
 
 const styles = {
   page: `
@@ -87,4 +76,4 @@ const styles = {
     flex w-full flex-col
     items-center gap-5
   `,
-};
+}

@@ -1,46 +1,19 @@
-import { useEffect, useState } from "react";
-import Item from "../components/Item";
-import { getPriceSelectedItems } from "../apis/productApi";
+import { useEffect } from 'react'
+import ProductItem from '../components/ProductItem'
+import { useProductStore } from '../store/productStore'
 
 function PriceFilter() {
-  const [lowPrice, setLowPrice] = useState("");
-  const [highPrice, setHighPrice] = useState("");
-
-  const [items, setItems] = useState([]);
-  const [filteredItems, setFilteredItems] = useState([]);
+  const lowPrice = useProductStore((state) => state.lowPrice)
+  const highPrice = useProductStore((state) => state.highPrice)
+  const filteredItems = useProductStore((state) => state.filteredPriceItems)
+  const loadPriceItems = useProductStore((state) => state.loadPriceItems)
+  const setLowPrice = useProductStore((state) => state.setLowPrice)
+  const setHighPrice = useProductStore((state) => state.setHighPrice)
+  const applyPriceFilter = useProductStore((state) => state.applyPriceFilter)
 
   useEffect(() => {
-    const fetchPriceItems = async () => {
-      const data = await getPriceSelectedItems();
-
-      setLowPrice(String(data.low));
-      setHighPrice(String(data.high));
-
-      setItems(data.items);
-      setFilteredItems(data.items);
-    };
-
-    fetchPriceItems();
-  }, []);
-
-  const handleNumberInput = (e, setter) => {
-    const value = e.target.value;
-
-    if (/^\d*$/.test(value)) {
-      setter(value);
-    }
-  };
-
-  const handleSearch = () => {
-    const low = Number(lowPrice);
-    const high = Number(highPrice);
-
-    const result = items.filter((item) => {
-      return item.price >= low && item.price <= high;
-    });
-
-    setFilteredItems(result);
-  };
+    loadPriceItems()
+  }, [loadPriceItems])
 
   return (
     <main className={styles.page}>
@@ -48,20 +21,20 @@ function PriceFilter() {
         <input
           type="text"
           value={lowPrice}
-          onChange={(e) => handleNumberInput(e, setLowPrice)}
+          onChange={(e) => setLowPrice(e.target.value)}
           className={styles.priceInput}
         />
 
         <input
           type="text"
           value={highPrice}
-          onChange={(e) => handleNumberInput(e, setHighPrice)}
+          onChange={(e) => setHighPrice(e.target.value)}
           className={styles.priceInput}
         />
 
         <button
           type="button"
-          onClick={handleSearch}
+          onClick={applyPriceFilter}
           className={styles.searchButton}
         >
           검색
@@ -72,14 +45,14 @@ function PriceFilter() {
 
       <div className={styles.itemList}>
         {filteredItems.map((item) => (
-          <Item key={item.id} item={item} />
+          <ProductItem key={item.id} item={item} />
         ))}
       </div>
     </main>
-  );
+  )
 }
 
-export default PriceFilter;
+export default PriceFilter
 
 const styles = {
   page: `
@@ -119,4 +92,4 @@ const styles = {
     flex w-full flex-col
     items-center gap-5
   `,
-};
+}

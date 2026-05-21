@@ -1,17 +1,16 @@
-import { Routes, Route, useLocation } from "react-router";
+import { Route, Routes, useLocation } from 'react-router'
 
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-
-import Home from "./pages/Home";
-import CategoryFilter from "./pages/CategoryFilter";
-import PriceFilter from "./pages/PriceFilter";
-import ProductSort from "./pages/ProductSort";
-import Admin from "./pages/Admin";
+import Footer from './components/Footer'
+import Navbar from './components/Navbar'
+import Admin from './pages/Admin'
+import CategoryFilter from './pages/CategoryFilter'
+import Home from './pages/Home'
+import PriceFilter from './pages/PriceFilter'
+import ProductSort from './pages/ProductSort'
 
 function App() {
-  const location = useLocation();
-  const isAdminPage = location.pathname === "/admin";
+  const location = useLocation()
+  const isAdminPage = location.pathname === '/admin'
 
   return (
     <div className="min-h-screen bg-white text-[#333]">
@@ -27,7 +26,7 @@ function App() {
 
       {!isAdminPage && <Footer />}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

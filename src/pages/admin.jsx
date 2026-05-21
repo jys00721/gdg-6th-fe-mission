@@ -1,128 +1,58 @@
-import { useState } from "react";
+import { useProductStore } from '../store/productStore'
 
 function Admin() {
-  const [registerName, setRegisterName] = useState("");
-  const [registerPrice, setRegisterPrice] = useState("");
-  const [registerQuantity, setRegisterQuantity] = useState("");
-  const [registerCategory, setRegisterCategory] = useState("");
-
-  const [stockName, setStockName] = useState("");
-  const [stockQuantity, setStockQuantity] = useState("");
-
-  const [deleteName, setDeleteName] = useState("");
-
-  const API_URL = "http://10.90.5.53:8080/admin/products";
-
-  const handleNumberInput = (e, setter) => {
-    const value = e.target.value;
-
-    if (/^\d*$/.test(value)) {
-      setter(value);
-    }
-  };
+  const {
+    registerName,
+    registerPrice,
+    registerQuantity,
+    registerCategory,
+    stockName,
+    stockQuantity,
+    deleteName,
+  } = useProductStore((state) => state.adminForm)
+  const setAdminField = useProductStore((state) => state.setAdminField)
+  const setAdminNumberField = useProductStore(
+    (state) => state.setAdminNumberField
+  )
+  const registerProduct = useProductStore((state) => state.registerProduct)
+  const addStock = useProductStore((state) => state.addStock)
+  const deleteProduct = useProductStore((state) => state.deleteProduct)
 
   const handleRegister = async () => {
-    const newItem = {
-      productName: registerName,
-      productPrice: Number(registerPrice),
-      remainQuantity: Number(registerQuantity),
-    };
-
-    if (!registerName || !registerPrice || !registerQuantity) {
-      alert("상품명, 가격, 수량, 카테고리를 모두 입력해주세요.");
-      return;
-    }
-
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newItem),
-      });
+      const data = await registerProduct()
 
-      if (!response.ok) {
-        throw new Error("상품 등록 실패");
-      }
-
-      const data = await response.json();
-
-      console.log("상품 등록 성공:", data);
-      alert("상품이 등록되었습니다.");
-
-      setRegisterName("");
-      setRegisterPrice("");
-      setRegisterQuantity("");
+      console.log('상품 등록 성공:', data)
+      alert('상품이 등록되었습니다.')
     } catch (error) {
-      console.error("상품 등록 중 오류 발생:", error);
-      alert("상품 등록에 실패했습니다.");
+      console.error('상품 등록 중 오류 발생:', error)
+      alert(error.message || '상품 등록에 실패했습니다.')
     }
-  };
+  }
 
   const handleAddStock = async () => {
-    const stockItem = {
-      addQuantity: Number(stockQuantity),
-    };
-
-    if (!stockName || !stockQuantity) {
-      alert("상품명과 수량을 모두 입력해주세요.");
-      return;
-    }
-
     try {
-      const response = await fetch(`${API_URL}/${stockName}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(stockItem),
-      });
+      const data = await addStock()
 
-      if (!response.ok) {
-        throw new Error("재고 추가 실패");
-      }
-
-      const data = await response.json();
-
-      console.log("재고 추가 성공:", data);
-      alert("재고가 추가되었습니다.");
-
-      setStockName("");
-      setStockQuantity("");
+      console.log('재고 추가 성공:', data)
+      alert('재고가 추가되었습니다.')
     } catch (error) {
-      console.error("재고 추가 중 오류 발생:", error);
-      alert("재고 추가에 실패했습니다.");
+      console.error('재고 추가 중 오류 발생:', error)
+      alert(error.message || '재고 추가에 실패했습니다.')
     }
-  };
+  }
 
   const handleDelete = async () => {
-    if (!deleteName) {
-      alert("삭제할 상품명을 입력해주세요.");
-      return;
-    }
-
     try {
-      const response = await fetch(
-        `${API_URL}/${encodeURIComponent(deleteName)}`,
-        {
-          method: "DELETE",
-        },
-      );
+      await deleteProduct()
 
-      if (!response.ok) {
-        throw new Error("상품 삭제 실패");
-      }
-
-      console.log("상품 삭제 성공");
-      alert("상품이 삭제되었습니다.");
-
-      setDeleteName("");
+      console.log('상품 삭제 성공')
+      alert('상품이 삭제되었습니다.')
     } catch (error) {
-      console.error("상품 삭제 중 오류 발생:", error);
-      alert("상품 삭제에 실패했습니다.");
+      console.error('상품 삭제 중 오류 발생:', error)
+      alert(error.message || '상품 삭제에 실패했습니다.')
     }
-  };
+  }
 
   return (
     <main className={styles.page}>
@@ -136,7 +66,7 @@ function Admin() {
               type="text"
               placeholder="상품명 입력..."
               value={registerName}
-              onChange={(e) => setRegisterName(e.target.value)}
+              onChange={(e) => setAdminField('registerName', e.target.value)}
               className={styles.input}
             />
 
@@ -145,7 +75,9 @@ function Admin() {
               type="text"
               placeholder="0"
               value={registerQuantity}
-              onChange={(e) => handleNumberInput(e, setRegisterQuantity)}
+              onChange={(e) =>
+                setAdminNumberField('registerQuantity', e.target.value)
+              }
               className={styles.input}
             />
           </div>
@@ -156,7 +88,9 @@ function Admin() {
               type="text"
               placeholder="가격 입력..."
               value={registerPrice}
-              onChange={(e) => handleNumberInput(e, setRegisterPrice)}
+              onChange={(e) =>
+                setAdminNumberField('registerPrice', e.target.value)
+              }
               className={styles.input}
             />
 
@@ -165,7 +99,9 @@ function Admin() {
               type="text"
               placeholder="카테고리 선택"
               value={registerCategory}
-              onChange={(e) => setRegisterCategory(e.target.value)}
+              onChange={(e) =>
+                setAdminField('registerCategory', e.target.value)
+              }
               className={styles.input}
             />
           </div>
@@ -196,7 +132,7 @@ function Admin() {
               type="text"
               placeholder="상품명 입력..."
               value={stockName}
-              onChange={(e) => setStockName(e.target.value)}
+              onChange={(e) => setAdminField('stockName', e.target.value)}
               className={styles.input}
             />
 
@@ -205,7 +141,9 @@ function Admin() {
               type="text"
               placeholder="0"
               value={stockQuantity}
-              onChange={(e) => handleNumberInput(e, setStockQuantity)}
+              onChange={(e) =>
+                setAdminNumberField('stockQuantity', e.target.value)
+              }
               className={styles.input}
             />
           </div>
@@ -232,7 +170,7 @@ function Admin() {
               type="text"
               placeholder="상품명 입력..."
               value={deleteName}
-              onChange={(e) => setDeleteName(e.target.value)}
+              onChange={(e) => setAdminField('deleteName', e.target.value)}
               className={styles.input}
             />
           </div>
@@ -249,10 +187,10 @@ function Admin() {
         </div>
       </section>
     </main>
-  );
+  )
 }
 
-export default Admin;
+export default Admin
 
 const styles = {
   page: `
@@ -321,4 +259,4 @@ const styles = {
     mt-3
     text-sm text-gray-400
   `,
-};
+}

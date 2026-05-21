@@ -1,46 +1,23 @@
-import { useEffect, useState } from "react";
-import Item from "../components/Item";
-import { getSortedItems } from "../apis/productApi";
+import { useEffect } from 'react'
+import ProductItem from '../components/ProductItem'
+import { useProductStore } from '../store/productStore'
 
 function ProductSort() {
-  const [sortType, setSortType] = useState("");
-  const [items, setItems] = useState([]);
-  const [originalItems, setOriginalItems] = useState([]);
+  const sortType = useProductStore((state) => state.sortType)
+  const items = useProductStore((state) => state.sortedItems)
+  const loadSortedItems = useProductStore((state) => state.loadSortedItems)
+  const setSortType = useProductStore((state) => state.setSortType)
 
   useEffect(() => {
-    const fetchSortedItems = async () => {
-      const data = await getSortedItems();
-
-      setItems(data);
-      setOriginalItems(data);
-    };
-
-    fetchSortedItems();
-  }, []);
-
-  const handleSortChange = (e) => {
-    const selectedType = e.target.value;
-    setSortType(selectedType);
-
-    const copiedItems = [...originalItems];
-
-    if (selectedType === "name") {
-      copiedItems.sort((a, b) => a.itemName.localeCompare(b.itemName));
-    }
-
-    if (selectedType === "price") {
-      copiedItems.sort((a, b) => a.price - b.price);
-    }
-
-    setItems(copiedItems);
-  };
+    loadSortedItems()
+  }, [loadSortedItems])
 
   return (
     <main className={styles.page}>
       <div className={styles.selectWrapper}>
         <select
           value={sortType}
-          onChange={handleSortChange}
+          onChange={(e) => setSortType(e.target.value)}
           className={styles.select}
         >
           <option value="">정렬 기준 선택</option>
@@ -53,14 +30,14 @@ function ProductSort() {
 
       <div className={styles.itemList}>
         {items.map((item) => (
-          <Item key={item.id} item={item} />
+          <ProductItem key={item.id} item={item} />
         ))}
       </div>
     </main>
-  );
+  )
 }
 
-export default ProductSort;
+export default ProductSort
 
 const styles = {
   page: `
@@ -91,4 +68,4 @@ const styles = {
     flex w-full flex-col
     items-center gap-5
   `,
-};
+}

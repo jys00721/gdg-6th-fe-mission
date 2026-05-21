@@ -5,10 +5,10 @@ function Footer() {
         장바구니 구매하기
       </button>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer
 
 const styles = {
   footer: `
@@ -27,4 +27,4 @@ const styles = {
     hover:bg-blue-500 hover:text-white
     md:text-lg
   `,
-};
+}

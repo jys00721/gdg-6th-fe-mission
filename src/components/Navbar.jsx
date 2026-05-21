@@ -1,10 +1,10 @@
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from 'react-router'
 
 function Navbar() {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  const isAdminPage = location.pathname === "/admin";
+  const isAdminPage = location.pathname === '/admin'
 
   return (
     <header className={styles.header}>
@@ -12,7 +12,7 @@ function Navbar() {
         src="/gdg-favicon.svg"
         alt="GDG 로고"
         className={styles.logo}
-        onClick={() => navigate("/")}
+        onClick={() => navigate('/')}
       />
 
       {!isAdminPage && (
@@ -20,7 +20,7 @@ function Navbar() {
           <button
             type="button"
             className={styles.navButton}
-            onClick={() => navigate("/category-filter")}
+            onClick={() => navigate('/category-filter')}
           >
             카테고리 필터링
           </button>
@@ -28,7 +28,7 @@ function Navbar() {
           <button
             type="button"
             className={styles.navButton}
-            onClick={() => navigate("/price-filter")}
+            onClick={() => navigate('/price-filter')}
           >
             가격 범위 필터링
           </button>
@@ -36,7 +36,7 @@ function Navbar() {
           <button
             type="button"
             className={styles.navButton}
-            onClick={() => navigate("/sort")}
+            onClick={() => navigate('/sort')}
           >
             상품 정렬
           </button>
@@ -46,15 +46,15 @@ function Navbar() {
       <button
         type="button"
         className={styles.adminButton}
-        onClick={() => navigate(isAdminPage ? "/" : "/admin")}
+        onClick={() => navigate(isAdminPage ? '/' : '/admin')}
       >
-        {isAdminPage ? "소비자" : "관리자"}
+        {isAdminPage ? '소비자' : '관리자'}
       </button>
     </header>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar
 
 const styles = {
   header: `
@@ -93,4 +93,4 @@ const styles = {
     md:right-[80px] md:px-3 md:py-2 md:text-[15px]
     lg:right-[200px]
   `,
-};
+}

@@ -1,32 +1,17 @@
-import { useEffect, useState } from "react";
-import Item from "../components/Item";
-import { getItems } from "../apis/productApi";
+import { useEffect } from 'react'
+import ProductItem from '../components/ProductItem'
+import { useProductStore } from '../store/productStore'
 
 function Home() {
-  const [keyword, setKeyword] = useState("");
-  const [items, setItems] = useState([]);
-  const [resultItem, setResultItem] = useState(null);
+  const keyword = useProductStore((state) => state.keyword)
+  const resultItem = useProductStore((state) => state.resultItem)
+  const loadItems = useProductStore((state) => state.loadItems)
+  const setKeyword = useProductStore((state) => state.setKeyword)
+  const searchItem = useProductStore((state) => state.searchItem)
 
   useEffect(() => {
-    const fetchItems = async () => {
-      const data = await getItems();
-      setItems(data);
-    };
-
-    fetchItems();
-  }, []);
-
-  const handleSearch = () => {
-    const trimmedKeyword = keyword.trim();
-
-    const foundItem = items.find((item) => item.itemName === trimmedKeyword);
-
-    if (foundItem) {
-      setResultItem(foundItem);
-    } else {
-      setResultItem(null);
-    }
-  };
+    loadItems()
+  }, [loadItems])
 
   return (
     <main className={styles.main}>
@@ -41,7 +26,7 @@ function Home() {
 
         <button
           type="button"
-          onClick={handleSearch}
+          onClick={searchItem}
           className={styles.searchButton}
         >
           검색
@@ -50,7 +35,7 @@ function Home() {
 
       {resultItem ? (
         <section className={styles.resultArea}>
-          <Item item={resultItem} />
+          <ProductItem item={resultItem} />
         </section>
       ) : (
         <div className={styles.emptyArea}>
@@ -64,10 +49,10 @@ function Home() {
         </div>
       )}
     </main>
-  );
+  )
 }
 
-export default Home;
+export default Home
 
 const styles = {
   main: `
@@ -118,4 +103,4 @@ const styles = {
     m-0
     text-lg font-medium text-gray-400
   `,
-};
+}
