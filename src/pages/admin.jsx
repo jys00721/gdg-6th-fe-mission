@@ -1,74 +1,5 @@
 import { useState } from "react";
 
-const styles = {
-  page: `
-    flex flex-col items-center
-    pt-16 pb-20
-  `,
-
-  section: `
-    mb-14
-    w-full max-w-[760px]
-  `,
-
-  title: `
-    mb-4
-    text-lg font-bold
-    text-gray-800
-  `,
-
-  formBox: `
-    rounded-lg border border-gray-300
-    p-6
-  `,
-
-  row: `
-    mb-4
-    flex items-center gap-4
-  `,
-
-  label: `
-    w-20
-    text-sm font-medium
-    text-gray-700
-  `,
-
-  input: `
-    h-10 flex-1
-    rounded-lg border border-gray-300
-    px-4
-    text-sm
-    outline-none
-  `,
-
-  buttonArea: `
-    mt-5 flex justify-end
-  `,
-
-  blueButton: `
-    h-10 w-32
-    rounded-lg
-    bg-blue-500
-    text-sm text-white
-    transition
-    hover:bg-blue-600
-  `,
-
-  redButton: `
-    h-10 w-32
-    rounded-lg
-    bg-red-500
-    text-sm text-white
-    transition
-    hover:bg-red-600
-  `,
-
-  helperText: `
-    mt-3
-    text-sm text-gray-400
-  `,
-};
-
 function Admin() {
   const [registerName, setRegisterName] = useState("");
   const [registerPrice, setRegisterPrice] = useState("");
@@ -322,3 +253,72 @@ function Admin() {
 }
 
 export default Admin;
+
+const styles = {
+  page: `
+    flex flex-col items-center
+    pt-16 pb-20
+  `,
+
+  section: `
+    mb-14
+    w-full max-w-[760px]
+  `,
+
+  title: `
+    mb-4
+    text-lg font-bold
+    text-gray-800
+  `,
+
+  formBox: `
+    rounded-lg border border-gray-300
+    p-6
+  `,
+
+  row: `
+    mb-4
+    flex items-center gap-4
+  `,
+
+  label: `
+    w-20
+    text-sm font-medium
+    text-gray-700
+  `,
+
+  input: `
+    h-10 flex-1
+    rounded-lg border border-gray-300
+    px-4
+    text-sm
+    outline-none
+  `,
+
+  buttonArea: `
+    mt-5 flex justify-end
+  `,
+
+  blueButton: `
+    h-10 w-32
+    rounded-lg
+    bg-blue-500
+    text-sm text-white
+    transition
+    hover:bg-blue-600
+  `,
+
+  redButton: `
+    h-10 w-32
+    rounded-lg
+    bg-red-500
+    text-sm text-white
+    transition
+    hover:bg-red-600
+  `,
+
+  helperText: `
+    mt-3
+    text-sm text-gray-400
+  `,
+};

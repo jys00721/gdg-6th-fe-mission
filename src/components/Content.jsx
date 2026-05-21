@@ -1,3 +1,33 @@
+function Content() {
+  return (
+    <main className={styles.main}>
+      <div className={styles.searchArea}>
+        <input
+          type="text"
+          placeholder="상품 검색..."
+          className={styles.searchInput}
+        />
+
+        <button type="button" className={styles.searchButton}>
+          검색
+        </button>
+      </div>
+
+      <div className={styles.emptyArea}>
+        <img
+          src="/gdg-favicon.svg"
+          alt="GDG 로고"
+          className={styles.emptyLogo}
+        />
+
+        <p className={styles.emptyText}>검색 결과가 없습니다.</p>
+      </div>
+    </main>
+  );
+}
+
+export default Content;
+
 const styles = {
   main: `
     relative h-[580px]
@@ -50,33 +80,3 @@ const styles = {
     md:text-lg
   `,
 };
-
-function Content() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.searchArea}>
-        <input
-          type="text"
-          placeholder="상품 검색..."
-          className={styles.searchInput}
-        />
-
-        <button type="button" className={styles.searchButton}>
-          검색
-        </button>
-      </div>
-
-      <div className={styles.emptyArea}>
-        <img
-          src="/gdg-favicon.svg"
-          alt="GDG 로고"
-          className={styles.emptyLogo}
-        />
-
-        <p className={styles.emptyText}>검색 결과가 없습니다.</p>
-      </div>
-    </main>
-  );
-}
-
-export default Content;

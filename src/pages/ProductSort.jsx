@@ -2,37 +2,6 @@ import { useEffect, useState } from "react";
 import Item from "../components/Item";
 import { getSortedItems } from "../apis/productApi";
 
-const styles = {
-  page: `
-    flex flex-col items-center
-    pt-16 pb-20
-  `,
-
-  selectWrapper: `
-    mb-16
-    w-full max-w-[760px]
-  `,
-
-  select: `
-    h-10 w-[200px]
-    rounded-lg border border-gray-300
-    px-4
-    text-sm text-gray-500
-    outline-none
-  `,
-
-  sectionTitle: `
-    mb-3
-    w-full max-w-[760px]
-    text-right text-sm text-gray-600
-  `,
-
-  itemList: `
-    flex w-full flex-col
-    items-center gap-5
-  `,
-};
-
 function ProductSort() {
   const [sortType, setSortType] = useState("");
   const [items, setItems] = useState([]);
@@ -92,3 +61,34 @@ function ProductSort() {
 }
 
 export default ProductSort;
+
+const styles = {
+  page: `
+    flex flex-col items-center
+    pt-16 pb-20
+  `,
+
+  selectWrapper: `
+    mb-16
+    w-full max-w-[760px]
+  `,
+
+  select: `
+    h-10 w-[200px]
+    rounded-lg border border-gray-300
+    px-4
+    text-sm text-gray-500
+    outline-none
+  `,
+
+  sectionTitle: `
+    mb-3
+    w-full max-w-[760px]
+    text-right text-sm text-gray-600
+  `,
+
+  itemList: `
+    flex w-full flex-col
+    items-center gap-5
+  `,
+};

@@ -2,46 +2,6 @@ import { useEffect, useState } from "react";
 import Item from "../components/Item";
 import { getPriceSelectedItems } from "../apis/productApi";
 
-const styles = {
-  page: `
-    flex flex-col items-center
-    pt-16 pb-20
-  `,
-
-  filterArea: `
-    mb-16
-    flex items-center gap-4
-  `,
-
-  priceInput: `
-    h-10 w-[180px]
-    rounded-lg border border-gray-300
-    px-4
-    text-sm
-    outline-none
-  `,
-
-  searchButton: `
-    h-10 w-32
-    rounded-lg
-    bg-blue-500
-    text-sm text-white
-    transition
-    hover:bg-blue-600
-  `,
-
-  sectionTitle: `
-    mb-3
-    w-full max-w-[760px]
-    text-right text-sm text-gray-600
-  `,
-
-  itemList: `
-    flex w-full flex-col
-    items-center gap-5
-  `,
-};
-
 function PriceFilter() {
   const [lowPrice, setLowPrice] = useState("");
   const [highPrice, setHighPrice] = useState("");
@@ -120,3 +80,43 @@ function PriceFilter() {
 }
 
 export default PriceFilter;
+
+const styles = {
+  page: `
+    flex flex-col items-center
+    pt-16 pb-20
+  `,
+
+  filterArea: `
+    mb-16
+    flex items-center gap-4
+  `,
+
+  priceInput: `
+    h-10 w-[180px]
+    rounded-lg border border-gray-300
+    px-4
+    text-sm
+    outline-none
+  `,
+
+  searchButton: `
+    h-10 w-32
+    rounded-lg
+    bg-blue-500
+    text-sm text-white
+    transition
+    hover:bg-blue-600
+  `,
+
+  sectionTitle: `
+    mb-3
+    w-full max-w-[760px]
+    text-right text-sm text-gray-600
+  `,
+
+  itemList: `
+    flex w-full flex-col
+    items-center gap-5
+  `,
+};

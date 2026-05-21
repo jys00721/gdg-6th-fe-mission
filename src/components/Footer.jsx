@@ -1,3 +1,15 @@
+function Footer() {
+  return (
+    <footer className={styles.footer}>
+      <button type="button" className={styles.cartButton}>
+        장바구니 구매하기
+      </button>
+    </footer>
+  );
+}
+
+export default Footer;
+
 const styles = {
   footer: `
     flex justify-center
@@ -16,15 +28,3 @@ const styles = {
     md:text-lg
   `,
 };
-
-function Footer() {
-  return (
-    <footer className={styles.footer}>
-      <button type="button" className={styles.cartButton}>
-        장바구니 구매하기
-      </button>
-    </footer>
-  );
-}
-
-export default Footer;

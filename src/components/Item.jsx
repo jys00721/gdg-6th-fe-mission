@@ -1,77 +1,5 @@
 import { useState } from "react";
 
-const styles = {
-  itemBox: `
-    flex w-full max-w-[760px]
-    flex-col gap-5
-    rounded-lg border border-gray-300
-    px-5 py-4
-    md:flex-row md:items-center md:justify-between
-  `,
-
-  infoArea: `
-    flex flex-col gap-4
-  `,
-
-  itemName: `
-    text-base font-bold text-black
-  `,
-
-  detailArea: `
-    flex items-center gap-4
-    text-sm text-gray-400
-  `,
-
-  price: `
-    text-base text-black
-  `,
-
-  controlArea: `
-    flex w-full
-    items-center gap-3
-    md:w-auto md:gap-4
-  `,
-
-  countInput: `
-    h-12 flex-1
-    rounded-lg border border-gray-300
-    px-4
-    text-base
-    outline-none
-    md:w-[220px] md:flex-none
-  `,
-
-  disabledInput: `
-    h-12 flex-1
-    rounded-lg border border-gray-300
-    bg-gray-100
-    px-4
-    text-base text-gray-400
-    outline-none
-    cursor-not-allowed
-    md:w-[220px] md:flex-none
-  `,
-
-  activeButton: `
-    h-12 w-28
-    rounded-lg
-    bg-blue-500
-    text-sm text-white
-    transition
-    hover:bg-blue-600
-    md:w-32 md:text-base
-  `,
-
-  disabledButton: `
-    h-12 w-28
-    rounded-lg
-    bg-gray-300
-    text-sm text-white
-    cursor-not-allowed
-    md:w-32 md:text-base
-  `,
-};
-
 function Item({ item }) {
   const [count, setCount] = useState("");
   const [remainingQuantity, setRemainingQuantity] = useState(item.quantity);
@@ -144,3 +72,22 @@ function Item({ item }) {
 }
 
 export default Item;
+
+const styles = {
+  footer: `
+    flex justify-center
+    px-4 pb-10
+  `,
+
+  cartButton: `
+    h-14 w-full
+    max-w-[760px]
+    rounded-lg
+    border-2 border-blue-400
+    bg-white
+    text-base text-blue-500
+    transition
+    hover:bg-blue-500 hover:text-white
+    md:text-lg
+  `,
+};
