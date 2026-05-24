@@ -208,23 +208,6 @@ export default Item;
 apis/
 └── productApi.js
 ```
-
-예를 들어 상품 목록을 가져오는 함수는 다음과 같이 분리할 수 있다.
-
-```js
-const API_URL = "http://localhost:3000/products";
-
-export async function getProducts() {
-  const response = await fetch(API_URL);
-
-  if (!response.ok) {
-    throw new Error("상품 목록을 불러오지 못했습니다.");
-  }
-
-  return response.json();
-}
-```
-
 컴포넌트에서 직접 `fetch`를 작성하면 컴포넌트가 너무 많은 역할을 하게 된다.
 
 따라서 API 요청 로직은 `apis` 폴더로 분리하는 것이 좋다.
@@ -259,20 +242,6 @@ assets/
 ```
 
 예를 들어 로고 이미지나 버튼 아이콘처럼 코드에서 import해서 사용하는 파일을 넣을 수 있다.
-
-```jsx
-import logo from "../assets/images/logo.png";
-
-function Header() {
-  return <img src={logo} alt="로고" />;
-}
-
-export default Header;
-```
-
-단, `public` 폴더에 넣는 파일과 `assets` 폴더에 넣는 파일은 사용 방식이 조금 다르다.
-
-`public` 폴더의 파일은 `/파일명`처럼 직접 경로로 접근할 수 있고, `assets` 폴더의 파일은 import해서 사용하는 경우가 많다.
 
 ---
 
@@ -310,8 +279,6 @@ src/
 ```
 
 기존 구조는 페이지, 컴포넌트, API 파일이 분리되어 있어 기본적인 역할 구분은 되어 있었다. 하지만 현재 앱에서 사용하지 않는 파일도 함께 남아 있었고, 상태 관리 로직이 각 페이지와 컴포넌트 내부에 흩어져 있었다.
-
-예를 들어 `Home`, `CategoryFilter`, `PriceFilter`, `ProductSort` 페이지는 각각 상품 데이터를 불러오고, 필터링하거나 정렬하는 상태를 직접 가지고 있었다. `Item` 컴포넌트도 장바구니 수량, 남은 재고, 장바구니 추가 여부를 내부 state로 관리하고 있었다.
 
 ## 리팩토링 후 폴더 구조
 
